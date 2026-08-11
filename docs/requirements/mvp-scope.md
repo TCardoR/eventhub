@@ -16,7 +16,7 @@
 
 ## Excluded
 
-- A complete web interfance
+- A complete web interface
 - Phone app
 - A real payment gateway
 - Electronic billing
@@ -27,7 +27,7 @@
 - DynamoDB
 - Terraform
 - Microservices
-- A.I recomendations
+- A.I recommendations
 - Multi-company or multi-tenant system.
 
 ## Future Evolution

@@ -23,7 +23,7 @@ Event capability should always be over 0
 Event price cannot be negative
 
 - BR-EVT-003 - Event Dates
-The Event end date should never be past the Event start date
+The Event start date should never be past the Event end date
 
 - BR-EVT-004 - Event Canceled
 An Event that was cancelled could not accept new Reservations
@@ -34,12 +34,9 @@ An Event that was published could not be deleted
 - BR-EVT-006 - Events Canceled History
 An Event that was cancelled should remain in history
 
-- BR-EVT-007 - Events Reservations
-The reservations could never be deleted, only cancelled
-
 ## Reservations
 
-- BR-RES-001 - Reservations Assistence
+- BR-RES-001 - Reservations attendees
 The quantity of assistants needs to be over 0
 
 - BR-RES-002 - Reservations Capacity
@@ -54,7 +51,7 @@ A confirmed Reservation could not be modified freely
 - BR-RES-005 - Reservations History
 All cancellations need to remain in the history
 
-- BR-RES-006 - Reservations Delatiom
+- BR-RES-006 - Reservations deletion
 Reservation could not be deleted, only cancelled
 
 ## Payments

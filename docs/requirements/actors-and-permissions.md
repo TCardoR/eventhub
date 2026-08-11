@@ -30,7 +30,7 @@ The customer represents a person linked to a company.
 
 ***They can:***
 - Consult available events
-- Create reserves
-- Consult their own reserves
-- Cancel reserves under certain conditions
+- Create reservations
+- Consult their own reservations
+- Cancel reservations under certain conditions
 - Consult their own payments.
