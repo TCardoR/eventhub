@@ -23,7 +23,7 @@ Event capability should always be over 0
 Event price cannot be negative
 
 - BR-EVT-003 - Event Dates
-The Event start date should never be past the Event end date
+The Event end date/time must be later than the start date/time
 
 - BR-EVT-004 - Event Canceled
 An Event that was cancelled could not accept new Reservations

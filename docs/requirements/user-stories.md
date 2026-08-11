@@ -93,8 +93,8 @@
 
 ### Acceptance Criteria
 
-- A reservation that was already paid cannot be cancelled; only the administrator can analyze the case and decide
-- Only the administrator or client of the reservation can cancel his own reservation
+- Paid reservations cannot be cancelled by a customer; an administrator may override the restriction
+- Only the administrator of the reservation can cancel his own reservation
 - A reservation that has already passed the event date cannot be cancelled
 
 ---
@@ -108,7 +108,7 @@
 ### Acceptance Criteria
 
 - reservation should exist
-- reservation price should be positive
+- payment amount is greater than zero
 - The date must be registered
 - The balance is recalculated after the payment
 
