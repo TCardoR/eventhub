@@ -26,4 +26,4 @@ Working with a simple, clear architecture from the beginning of the project has 
 
 ### Negative
 
-In the future, the work architecture will change, so its gonna be a difficult transition from one architecture to another.
+Using this architectural approach could result in a dependency on Spring and Hibernate

@@ -21,8 +21,7 @@ Represents an user that will be using the platform.
 
 ### Important Rules
 
-- UserName and password are mandatory.
-- The user should be of legal age.
+- email and password are mandatory.
 
 ---
 
@@ -92,6 +91,8 @@ Represents a contact of a company in the platform.
 
 ### Relationships
 
+Belongs to one Company.
+Can be associated with multiple Reservations.
 
 ### Important Rules
 
@@ -154,7 +155,12 @@ Represents a reservation for an event in the platform.
 
 ### Important Rules
 
-- Price must be greater than zero.
+- attendeeQuantity must be greater than zero.
+- It should not be over de event quatity.
+- company and contact should be active
+- The event should be valid
+- Cancel a reservation open event capacity
+- totalAmount must be greater than zero.
 
 ---
 
@@ -176,7 +182,7 @@ Represents a payment of a reservation in the platform.
 
 ### Relationships
 
-
+Belongs to one Reservation.
 
 ### Important Rules
 
@@ -202,7 +208,8 @@ Represents a Audit in the platform.
 
 ### Relationships
 
-
+Belongs to one User.
+References an affected entity through entityType and entityId.
 
 ### Important Rules
 

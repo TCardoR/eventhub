@@ -10,7 +10,7 @@ As part of the conception of this project, part of the initial idea was to use m
 
 ## Decision
 
-Due to the idea of making this project to increase different learnings, it's decided that the first part of the project, the microservices, will not be considered a viable option.
+Given that EventHub is initially intended to be a relatively small system, the goal is to perform a single deployment, and we want to avoid unnecessary initial complications; therefore, it has been decided that microservices will not be used initially.
 
 ## Alternatives Considered
 
@@ -22,8 +22,8 @@ Due to the idea of making this project to increase different learnings, it's dec
 
 ### Positive
 
-The project will bring a lot of learning during its development.
+This decision will make it possible to create a clean platform free of initial complications.
 
 ### Negative
 
-The moment it's decided that microservices are a good option, a big restructuring of the project is needed.
+The moment it's decided that microservices are a good option, a module by module extraction will be necessary.
