@@ -46,3 +46,11 @@ PostgreSQL provides the relational and transactional capabilities required by th
 EventHub will initially use JWT-based authentication and role-based authorization.
 
 Users will authenticate before accessing protected resources, and permissions will depend on their assigned role, such as Administrator, Organizer, or Customer.
+
+## Future Evolution
+
+The initial architecture is intentionally simple but modular.
+
+If the platform grows in complexity, selected modules could later be separated behind clearer interfaces or extracted into independent services when there is a concrete operational or scalability reason.
+
+The layered structure may also evolve toward Hexagonal Architecture by introducing ports and adapters around domain and application logic.

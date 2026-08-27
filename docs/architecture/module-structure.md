@@ -1,5 +1,5 @@
 
-user/ -> Responsible for user creation, modification, disable, audit and role managment
+user/ -> Responsible for user creation, modification, disable and role managment
 ├── controller/
 ├── service/
 ├── repository/
@@ -85,3 +85,5 @@ Represents the core data and domain concepts used by the module.
 Defines data exchanged through application boundaries, especially API requests and responses.
 
 DTOs should not be used as persistent domain objects.
+
+>This is the initial layered structure and may later evolve toward ports/adapters while preserving business module boundaries.

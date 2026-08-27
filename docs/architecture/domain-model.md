@@ -2,7 +2,7 @@
 
 ### Responsibility
 
-Represents an user that will be using the platform.
+Represents a user that will be using the platform.
 
 ### Main Attributes
 
@@ -17,7 +17,7 @@ Represents an user that will be using the platform.
 
 ### Relationships
 
-- Has many AditLogs.
+- Has many AuditLogs.
 
 ### Important Rules
 
@@ -63,7 +63,7 @@ Represents a company in the platform.
 
 ### Relationships
 
-- Has many Conctacts.
+- Has many Contacts.
 - Has many Reservations
 
 ### Important Rules
@@ -71,6 +71,7 @@ Represents a company in the platform.
 - An inactive Company cannot create new Reservations.
 - A Company can have multiple Contacts.
 - A Company can have multiple Reservations.
+- The externalIdentification must be unique when provided.
 
 ---
 
@@ -132,6 +133,8 @@ Represents an event managed by the platform.
 
 - Capacity must be greater than zero.
 - End date must be after start date.
+- Price cannot be negative.
+- Cancelled events cannot accept new reservations.
 
 ---
 
@@ -165,6 +168,8 @@ Represents a reservation for an event in the platform.
 - The Event must accept new Reservations.
 - Cancelling a Reservation releases its occupied capacity.
 - Reservations are not physically deleted; they are cancelled.
+- Confirmed reservations cannot be modified freely.
+- Cancellations must remain in history.
 
 ---
 
@@ -192,7 +197,7 @@ Represents a payment of a reservation in the platform.
 
 - Payment amount must be greater than zero.
 - A Reservation can have multiple Payments.
-- Valid Payments should not exceed the Reservation total unless credit balance handling is explicitly supported.
+- Valid payments must not exceed the reservation total unless credit balance support is explicitly enabled.
 - Registered Payments are not physically deleted; they can be voided.
 
 ---
@@ -201,7 +206,7 @@ Represents a payment of a reservation in the platform.
 
 ### Responsibility
 
-Represents a Audit in the platform.
+Represents an audit record in the platform.
 
 ### Main Attributes
 

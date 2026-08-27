@@ -42,3 +42,9 @@ The Repository layer will abstract access to persistent data.
 - Domain logic can become overly concentrated in Service classes.
 - Business code may become coupled to Spring or persistence technologies if boundaries are not respected.
 - Complex use cases can make the layered model rigid over time.
+
+### Future Evolution
+
+The architecture may later evolve toward Hexagonal Architecture by defining
+explicit application and domain ports and moving Spring, HTTP, and persistence
+details behind adapters.
