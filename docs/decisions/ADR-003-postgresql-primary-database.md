@@ -6,25 +6,46 @@ Accepted
 
 ## Context
 
-Because there are many different database engines, we must analyze them and decide which one is best suited to the specific needs of EventHub.
+EventHub manages structured and strongly related information.
+
+Companies have Contacts and Reservations. Reservations belong to Events and may contain multiple Payments. These operations require data integrity, relationships, constraints, transactions, and reporting queries.
+
+The primary database should therefore support reliable transactional operations and relational querying.
 
 ## Decision
 
-Given that PostgreSQL offers tools that allow for relating, joining, querying, and structuring data, among other options, it has been determined that it is the most adaptable tool and the one that can be best utilized for the system
+PostgreSQL will be used as the primary database for the initial EventHub implementation.
+
+Its relational model, ACID transaction support, constraints, joins, indexing, and SQL capabilities fit the structure and consistency requirements of the EventHub domain.
 
 ## Alternatives Considered
 
-- MySQL
-- PostgreSQL
-- MongoDB
-- DynamoDB
+### MySQL
+
+A valid relational alternative with strong ecosystem support. PostgreSQL was preferred because of its rich SQL capabilities and strong support for complex relational and transactional workloads.
+
+### MongoDB
+
+Provides flexible document-oriented storage, but EventHub's core model contains many relationships and transactional rules that naturally fit a relational database.
+
+### DynamoDB
+
+Provides highly scalable managed NoSQL storage, but requires access patterns to be designed differently and is less convenient for the relational queries required by the initial EventHub domain.
 
 ## Consequences
 
 ### Positive
 
-Using PostgreSQL, rather than other equally capable database engines, gives EventHub a special focus on relational data.
+- Strong relational integrity.
+- ACID transactions.
+- Foreign keys and constraints.
+- Powerful joins and SQL queries.
+- Good support for reporting workloads.
+- Mature Java and Spring integration.
 
 ### Negative
 
-Working with a relational focus keeps EventHub from using other data structures that could create a different focus for the platform.
+- Schema changes require controlled migrations.
+- Horizontal scaling may require more planning than some distributed NoSQL systems.
+- Highly unstructured data may not fit the relational model as naturally.
+- PostgreSQL becomes an important infrastructure dependency for the application.

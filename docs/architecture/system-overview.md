@@ -17,13 +17,13 @@ Later on, it’ll be refactored  toward Clean Architecture and Hexagonal.
 
 ## Main Components
 
-User Management
-Company and Contact Management
-Event Management
-Reservation Management
-Payment Management
-Audit
-Dashboard
+- **User Management:** manages users, roles, authentication-related data, and account status.
+- **Company and Contact Management:** manages client companies and their associated contacts.
+- **Event Management:** manages event creation, publication, scheduling, capacity, pricing, and status.
+- **Reservation Management:** manages reservations, attendee quantities, confirmation, cancellation, and capacity checks.
+- **Payment Management:** records payments associated with reservations and calculates outstanding balances.
+- **Audit:** records important actions performed in the platform.
+- **Dashboard:** provides aggregated information and operational indicators.
 
 ## Request Flow
 
@@ -35,8 +35,14 @@ Client
 
 ## Persistence
 
-Because PostgreSQL offers extensive data management capabilities, it will be the primary source of structured and transactional data
+PostgreSQL will be the primary data store for EventHub.
+
+The platform contains highly related information such as companies, contacts, events, reservations, and payments. These relationships require reliable transactions, constraints, joins, and consistent data management.
+
+PostgreSQL provides the relational and transactional capabilities required by the initial EventHub domain.
 
 ## Security
 
-Initially, EventHub will be secured using JWT authentication and role-based authorization
+EventHub will initially use JWT-based authentication and role-based authorization.
+
+Users will authenticate before accessing protected resources, and permissions will depend on their assigned role, such as Administrator, Organizer, or Customer.

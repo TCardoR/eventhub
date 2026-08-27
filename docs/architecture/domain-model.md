@@ -68,7 +68,9 @@ Represents a company in the platform.
 
 ### Important Rules
 
-- 
+- An inactive Company cannot create new Reservations.
+- A Company can have multiple Contacts.
+- A Company can have multiple Reservations.
 
 ---
 
@@ -91,12 +93,14 @@ Represents a contact of a company in the platform.
 
 ### Relationships
 
-Belongs to one Company.
-Can be associated with multiple Reservations.
+- Belongs to one Company.
+- Can be associated with multiple Reservations.
 
 ### Important Rules
 
-- Contact phoneNumber and email should be valid
+- A Contact belongs to one Company in the MVP.
+- An inactive Contact cannot create new Reservations.
+- Contact communication information must be valid when provided.
 
 ---
 
@@ -155,12 +159,12 @@ Represents a reservation for an event in the platform.
 
 ### Important Rules
 
-- attendeeQuantity must be greater than zero.
-- It should not be over de event quatity.
-- company and contact should be active
-- The event should be valid
-- Cancel a reservation open event capacity
-- totalAmount must be greater than zero.
+- Attendee quantity must be greater than zero.
+- A Reservation cannot exceed the Event's available capacity.
+- The associated Company and Contact must be active when the Reservation is created.
+- The Event must accept new Reservations.
+- Cancelling a Reservation releases its occupied capacity.
+- Reservations are not physically deleted; they are cancelled.
 
 ---
 
@@ -182,11 +186,14 @@ Represents a payment of a reservation in the platform.
 
 ### Relationships
 
-Belongs to one Reservation.
+- Belongs to one Reservation.
 
 ### Important Rules
 
-- 
+- Payment amount must be greater than zero.
+- A Reservation can have multiple Payments.
+- Valid Payments should not exceed the Reservation total unless credit balance handling is explicitly supported.
+- Registered Payments are not physically deleted; they can be voided.
 
 ---
 
@@ -208,9 +215,11 @@ Represents a Audit in the platform.
 
 ### Relationships
 
-Belongs to one User.
-References an affected entity through entityType and entityId.
+- Belongs to one User.
+- References an affected entity through `entityType` and `entityId`.
 
 ### Important Rules
 
-- 
+- Important business actions must generate an audit record.
+- Audit records represent actions that have already occurred.
+- Audit records should preserve the acting User, action, affected entity, and timestamp.

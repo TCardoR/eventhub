@@ -6,11 +6,21 @@ Accepted
 
 ## Context
 
-As part of constructing the project's Architecture, various options emerged that were entirely valid.
+EventHub needs a clear separation between HTTP communication, business operations, and data persistence.
+
+Without explicit boundaries, controllers could contain business rules and database logic, making the system harder to understand, test, and maintain.
 
 ## Decision
 
-Thinking about the different options available, it's decided that it will use a Layered Architecture, which means that the architecture flow would be something like: Controller → Service → Repository.
+EventHub will initially use a layered architecture with the following main flow:
+
+Controller → Service → Repository
+
+The Controller layer will handle HTTP communication.
+
+The Service layer will coordinate use cases and business rules.
+
+The Repository layer will abstract access to persistent data.
 
 ## Alternatives Considered
 
@@ -22,8 +32,13 @@ Thinking about the different options available, it's decided that it will use a 
 
 ### Positive
 
-Working with a simple, clear architecture from the beginning of the project has made the workflow easier.
+- Clear separation of responsibilities.
+- Easy to understand for the initial system size.
+- Supports unit and integration testing.
+- Keeps HTTP and persistence concerns separate from application workflows.
 
 ### Negative
 
-Using this architectural approach could result in a dependency on Spring and Hibernate
+- Domain logic can become overly concentrated in Service classes.
+- Business code may become coupled to Spring or persistence technologies if boundaries are not respected.
+- Complex use cases can make the layered model rigid over time.

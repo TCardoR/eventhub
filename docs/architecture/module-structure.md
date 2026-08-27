@@ -13,14 +13,14 @@ company/ -> Responsible for company creation, modification and disable
 ├── model/
 └── dto/
 
-contact/ ->
+contact/ -> Responsible for managing company contacts, contact information, activation status, and contact-company relationships.
 ├── controller/
 ├── service/
 ├── repository/
 ├── model/
 └── dto/
 
-event/ ->
+event/ -> Responsible for event creation, modification, publication, cancellation, capacity, scheduling, pricing, and status management.
 ├── controller/
 ├── service/
 ├── repository/
@@ -34,21 +34,21 @@ reservation/ -> Responsible for reservation creation, confirmation, cancellation
 ├── model/
 └── dto/
 
-payment/ ->
+payment/ -> Responsible for registering and voiding payments, associating payments with reservations, and calculating payment-related balances.
 ├── controller/
 ├── service/
 ├── repository/
 ├── model/
 └── dto/
 
-audit/ ->
+audit/ -> Responsible for recording and retrieving relevant platform activity.
 ├── controller/
 ├── service/
 ├── repository/
 ├── model/
 └── dto/
 
-dashboard/ ->
+dashboard/ -> Responsible for aggregating information from other modules to provide operational indicators and summaries.
 ├── controller/
 ├── service/
 ├── repository/
@@ -56,19 +56,32 @@ dashboard/ ->
 └── dto/
 
 
-## Module Definition
+## Layer Responsibilities
 
-* controller:
-Receives HTTP requests and returns HTTP responses.
+### controller
 
-* service:
-Coordinates use cases and business rules.
+Receives HTTP requests, validates request format, delegates operations to services, and builds HTTP responses.
 
-* repository:
+Controllers should not contain business rules or direct database access.
+
+### service
+
+Coordinates application use cases and business rules.
+
+Services may communicate with repositories and other services when required, but should not contain HTTP-specific logic.
+
+### repository
+
 Provides access to persistent data.
 
-* model:
-Contains domain-related data structures.
+Repositories should not contain HTTP logic or business workflows.
 
-* dto:
-Defines input and output structures used by the API.
+### model
+
+Represents the core data and domain concepts used by the module.
+
+### dto
+
+Defines data exchanged through application boundaries, especially API requests and responses.
+
+DTOs should not be used as persistent domain objects.
