@@ -8,9 +8,8 @@ import java.time.LocalDateTime;
 
 public class EventTest {
 
-        @Test
-        void shouldCreateEventAsDraft() {
-                Event event = new Event(
+        private Event createValidEvent() {
+                return new Event(
                                 "Java Conference",
                                 "Java event",
                                 "Medellin",
@@ -18,6 +17,11 @@ public class EventTest {
                                 LocalDateTime.of(2026, 10, 10, 17, 0),
                                 100,
                                 new BigDecimal("50.00"));
+        }
+
+        @Test
+        void shouldCreateEventAsDraft() {
+                Event event = createValidEvent();
 
                 assertEquals(EventStatus.DRAFT, event.getStatus());
         }
@@ -84,4 +88,89 @@ public class EventTest {
                                                 new BigDecimal("50.00")));
         }
 
+        @Test
+        void shouldStartWithFullAvailableCapacity() {
+                Event event = createValidEvent();
+
+                assertEquals(100, event.getCapacity());
+                assertEquals(0, event.getOccupiedCapacity());
+                assertEquals(100, event.getAvailableCapacity());
+        }
+
+        @Test
+        void shouldReserveCapacity() {
+                Event event = createValidEvent();
+
+                event.reserveCapacity(30);
+
+                assertEquals(30, event.getOccupiedCapacity());
+                assertEquals(70, event.getAvailableCapacity());
+        }
+
+        @Test
+        void shouldRejectReservationExceedingAvailableCapacity() {
+                Event event = createValidEvent();
+
+                assertThrows(
+                                IllegalStateException.class,
+                                () -> event.reserveCapacity(150));
+        }
+
+        @Test
+        void shouldReleaseCapacity() {
+                Event event = createValidEvent();
+
+                event.reserveCapacity(30);
+                event.releaseCapacity(20);
+
+                assertEquals(10, event.getOccupiedCapacity());
+                assertEquals(90, event.getAvailableCapacity());
+        }
+
+        @Test
+        void shouldRejectReleasingMoreThanOccupiedCapacity() {
+                Event event = createValidEvent();
+
+                event.reserveCapacity(30);
+
+                assertThrows(
+                                IllegalStateException.class,
+                                () -> event.releaseCapacity(40));
+        }
+
+        @Test
+        void shouldRejectZeroReserveQuantity() {
+                Event event = createValidEvent();
+
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> event.reserveCapacity(0));
+        }
+
+        @Test
+        void shouldRejectNegativeReserveQuantity() {
+                Event event = createValidEvent();
+
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> event.reserveCapacity(-5));
+        }
+
+        @Test
+        void shouldRejectZeroReleaseQuantity() {
+                Event event = createValidEvent();
+
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> event.releaseCapacity(0));
+        }
+
+        @Test
+        void shouldRejectNegativeReleaseQuantity() {
+                Event event = createValidEvent();
+
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> event.releaseCapacity(-5));
+        }
 }

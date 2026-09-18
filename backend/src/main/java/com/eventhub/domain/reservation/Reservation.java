@@ -28,6 +28,7 @@ public class Reservation {
             throw new IllegalStateException("Reservation can only be confirmed if it is in PENDING status.");
         }
 
+        event.reserveCapacity(attendeeQuantity);
         this.status = ReservationStatus.CONFIRMED;
     }
 
@@ -35,6 +36,11 @@ public class Reservation {
         if (status == ReservationStatus.CANCELLED) {
             throw new IllegalStateException("Reservation is already cancelled.");
         }
+
+        if (status == ReservationStatus.CONFIRMED) {
+            event.releaseCapacity(attendeeQuantity);
+        }
+
         this.status = ReservationStatus.CANCELLED;
     }
 

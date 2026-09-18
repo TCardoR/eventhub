@@ -11,6 +11,7 @@ public class Event {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private int capacity;
+    private int occupiedCapacity;
     private BigDecimal price;
     private EventStatus status;
 
@@ -35,6 +36,7 @@ public class Event {
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.capacity = capacity;
+        this.occupiedCapacity = 0;
         this.price = price;
         this.status = EventStatus.DRAFT;
     }
@@ -67,12 +69,44 @@ public class Event {
         return capacity;
     }
 
+    public int getOccupiedCapacity() {
+        return occupiedCapacity;
+    }
+
     public BigDecimal getPrice() {
         return price;
     }
 
     public EventStatus getStatus() {
         return status;
+    }
+
+    public int getAvailableCapacity() {
+        return capacity - occupiedCapacity;
+    }
+
+    public void reserveCapacity(int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be greater than zero");
+        }
+
+        if (quantity > getAvailableCapacity()) {
+            throw new IllegalStateException("Not enough available capacity for the requested quantity");
+        }
+
+        this.occupiedCapacity += quantity;
+    }
+
+    public void releaseCapacity(int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be greater than zero");
+        }
+
+        if (quantity > occupiedCapacity) {
+            throw new IllegalStateException("Cannot release more capacity than is currently occupied");
+        }
+
+        this.occupiedCapacity -= quantity;
     }
 
 }
